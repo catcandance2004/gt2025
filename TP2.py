@@ -1,12 +1,32 @@
+"""
+# Find components of a graph which is represented by Adjacency matrix
+# Behavior:
+#  - Input: Graph represented by matrix 
+#  - Output: Number of components both weak and strong 
+# Suggestions: BFS and DFS algorithms
+# Given graph matrix:
+graph = [
+    [0, 1, 0, 1, 0, 0, 0, 0, 0], # (1,2) (1,4)
+    [0, 0, 1, 0, 0, 1, 0, 0, 0], # (2,3) (2,6)
+    [0, 0, 0, 0, 0, 0, 0, 0, 0], # 0
+    [0, 0, 0, 0, 0, 0, 0, 0, 0], # 0
+    [0, 0, 0, 1, 1, 0, 0, 0, 1], # (5,4) (5,5) (5,9)
+    [0, 0, 1, 1, 0, 0, 0, 0, 0], # (6,3) (6,4)
+    [0, 0, 1, 0, 1, 1, 0, 1, 0], # (7,3) (7,5) (7,6) (7,8)
+    [0, 0, 1, 0, 0, 0, 0, 0, 1], # (8,3) (8,9)
+    [0, 0, 0, 0, 0, 0, 0, 0, 0], # 0
+]
+"""
+
 def dfs(node, graph, visited, component):
     """
     Depth-first search to find connected components
     """
-    stack = [node]
-    while stack:
-        current = stack.pop()
+    stack = [node] # init stack with starting node
+    while stack: # continue while stack not empty
+        current = stack.pop() # get next node to process
         if current not in visited:
-            visited.add(current)
+            visited.add(current) # if node not been visited, mark as visited
             component.add(current + 1)  # Convert to 1-based indexing
             # Add all unvisited neighbors
             for neighbor in range(len(graph)):
